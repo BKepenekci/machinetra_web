@@ -1,0 +1,372 @@
+<!--
+Machinetra static site (single-file index.html)
+Folder structure suggestion:
+  /index.html
+  /videos/hero.mp4
+  /images/machinetra_hero.png  (poster frame)
+
+How to use:
+  1) Put this file as index.html in your hosting root.
+  2) Upload the video and poster into the folders above.
+  3) Open in a browser; no build/tools needed.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Machinetra — Domain‑Independent Industrial Visual Inspection</title>
+  <meta name="description" content="Edge‑native, label‑free anomaly detection. Self‑POC web platform. Fixed or mobile deployments." />
+  <link rel="icon" href="favicon.ico" />
+   <style>
+    :root{
+      --bg:#050A1A;        /* deep navy */
+      --fg:#E6F1FF;        /* near-white */
+      --muted:#B0C7E4;     /* soft blue-gray */
+      --line:#102040;      /* border/navy */
+      --accent:#00BFFF;    /* cyan */
+      --accent-2:#33CCFF;  /* lighter cyan */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:0 16px}
+
+    /* Header */
+    .header{position:fixed;inset:0 0 auto 0;z-index:50;background:color-mix(in oklab, var(--bg) 80%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .logo{color:var(--accent);font-weight:700}
+    .nav{display:none;gap:24px;color:var(--muted)}
+    .nav a:hover{color:var(--fg)}
+    .btn{display:inline-block;padding:.6rem 1rem;border-radius:12px;font-weight:600}
+    .btn-primary{background:var(--accent);color:var(--bg)}
+    .btn-primary:hover{background:var(--accent-2)}
+    .lang{display:flex;gap:8px;margin-right:12px}
+    .lang button{background:transparent;border:1px solid var(--line);color:var(--muted);padding:6px 10px;border-radius:10px;cursor:pointer}
+    .lang button.active,.lang button:hover{border-color:var(--accent);color:var(--fg)}
+
+    /* Hero */
+    .hero{padding-top:72px}
+    .hero-wrap{position:relative;border:1px solid var(--line);border-radius:24px;overflow:hidden}
+    .hero video,.hero .poster{width:100%;height:min(56vw,560px);object-fit:cover;display:block}
+    .hero-grad{position:absolute;inset:0;background:linear-gradient(to top, color-mix(in oklab, var(--bg) 85%, transparent) 0%, color-mix(in oklab, var(--bg) 40%, transparent) 55%, transparent 100%)}
+    .hero-txt{position:absolute;left:0;right:0;bottom:0;padding:24px 24px 28px}
+    .hero h1{margin:0 0 8px;font-size:clamp(22px,3vw,36px)}
+    .hero p{margin:0;max-width:900px;color:var(--muted)}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .btn-ghost{border:1px solid var(--line)}
+    .btn-ghost:hover{border-color:var(--accent)}
+
+    /* Value props */
+    .grid{display:grid;gap:16px}
+    .grid-4{grid-template-columns:1fr}
+    .card{border:1px solid var(--line);border-radius:20px;background:color-mix(in oklab, var(--bg) 90%, black 10%);padding:18px}
+    .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    .card p{margin:6px 0 0;color:var(--fg)}
+    .card-img{width:100%;height:160px;object-fit:contain;margin-bottom:12px;background:color-mix(in oklab, var(--bg) 95%, black);border-radius:12px;padding:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
+
+    /* Sections */
+    section{padding:64px 0}
+    h2{margin:0 0 8px;font-size:clamp(22px,3vw,30px)}
+    .muted{color:var(--muted)}
+    .cols-3{grid-template-columns:1fr}
+    .cols-2{grid-template-columns:1fr}
+
+    /* CTA */
+    .cta{border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg, color-mix(in oklab, var(--accent) 20%, transparent), color-mix(in oklab, #7c3aed 20%, transparent));padding:32px;text-align:center}
+
+    /* Footer */
+    footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);text-align:center}
+
+    /* Responsive */
+    @media (min-width:768px){
+      .nav{display:flex}
+      .grid-4{grid-template-columns:repeat(4,1fr)}
+      .cols-3{grid-template-columns:repeat(3,1fr)}
+      .cols-2{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="logo">Machinetra</a>
+      <nav class="nav">
+        <a href="#about" data-i18n="nav_about" data-en="About" data-tr="Hakkında">About</a>
+        <a href="#platform" data-i18n="nav_platform" data-en="Web Platform" data-tr="Web Platformu">Web Platform</a>
+        <a href="#edge" data-i18n="nav_edge" data-en="Edge App" data-tr="Uç Uygulama">Edge App</a>
+        <a href="#hardware" data-i18n="nav_hw" data-en="Hardware" data-tr="Donanım">Hardware</a>
+        <a href="#contact" data-i18n="nav_contact" data-en="Contact" data-tr="İletişim">Contact</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="lang">
+          <button type="button" id="btn-en" class="active">EN</button>
+          <button type="button" id="btn-tr">TR</button>
+        </div>
+        <a href="https://machinetra.app" target="_blank" rel="noreferrer" class="btn btn-primary" data-i18n="cta_try" data-en="Try self‑POC" data-tr="Self‑POC’u dene">Try self‑POC</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-wrap">
+      <video id="heroVideo" autoplay muted playsinline poster="images/machinetra_hero.png">
+        <source id="heroSource" src="videos/hero.mp4" type="video/mp4" />
+      </video>
+      <!--div class="hero-grad" aria-hidden="true"></div-->
+  </section>
+  <section id="about">
+    <div class="container"  style="margin-top: 20px;">      
+        <h2 data-i18n="hero_h1" data-en="Domain‑Independent Industrial Visual Inspection — on the Edge" data-tr="Alan Bağımsız Endüstriyel Görsel Denetim — Uçta">Domain‑Independent Industrial Visual Inspection — on the Edge</h2>
+        <p data-i18n="hero_p" data-en="Real‑time, label‑free anomaly detection running on embedded devices. Self‑POC from your browser. Deploy on fixed stations or mobile robots." data-tr="Etiket gerektirmeyen gerçek zamanlı anomali tespiti; gömülü cihazlarda çalışır. Tarayıcıdan self‑POC. Sabit istasyonlarda veya mobil robotlarda konuşlandırın.">Real‑time, label‑free anomaly detection running on embedded devices. Self‑POC from your browser. Deploy on fixed stations or mobile robots.</p>
+        <div class="hero-actions"  style="margin-top: 20px;">
+          <a href="https://machinetra.app" target="_blank" rel="noreferrer" class="btn btn-primary" data-i18n="hero_open" data-en="Open machinetra.app" data-tr="machinetra.app’i aç">Open machinetra.app</a>
+          <a href="#platform" class="btn btn-ghost" data-i18n="hero_explore" data-en="Explore platform" data-tr="Platformu keşfet">Explore platform</a>
+        </div>
+      </div>
+    </div>   
+
+    <!-- Quick value props -->
+      <!-- Quick value props -->
+    <div class="container" style="margin-top:36px">
+      <div class="grid grid-4">
+        <div class="card">
+          <div class="card-img"><svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="160" rx="12" fill="#050A1A" fill-opacity="0.95"/>
+  <path d="M30 80L80 30L130 80L80 130L30 80Z" stroke="#00BFFF" stroke-width="6"/>
+  <circle cx="80" cy="80" r="20" fill="#00BFFF" fill-opacity="0.3"/>
+  <path d="M80 60V100M60 80H100" stroke="#00BFFF" stroke-width="6" stroke-linecap="round"/>
+</svg></div>
+          <div class="kicker" data-i18n="vp1_t" data-en="Edge‑native" data-tr="Edge‑native">Edge‑native</div>
+          <p data-i18n="vp1_s" data-en="No cloud dependency; ultra‑low latency & data sovereignty." data-tr="Bulut bağımlılığı yok; çok düşük gecikme ve veri egemenliği.">No cloud dependency; ultra‑low latency & data sovereignty.</p>
+        </div>
+        <div class="card">
+          <div class="card-img"><svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="160" rx="12" fill="#050A1A" fill-opacity="0.95"/>
+  <path d="M60 60L100 60L120 80L100 100L60 100L40 80L60 60Z" stroke="#00BFFF" stroke-width="6"/>
+  <circle cx="80" cy="80" r="15" fill="#00BFFF"/>
+  <path d="M80 65V80H95" stroke="#050A1A" stroke-width="3" stroke-linecap="round"/>
+</svg></div>
+          <div class="kicker" data-i18n="vp2_t" data-en="Zero‑defect learning" data-tr="Zero‑defect learning">Zero‑defect learning</div>
+          <p data-i18n="vp2_s" data-en="Learns from normal data—no labeled defects required." data-tr="Normal veriden öğrenir—etiketli hata gerekmez.">Learns from normal data—no labeled defects required.</p>
+        </div>
+        <div class="card">
+          <div class="card-img"><svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="160" rx="12" fill="#050A1A" fill-opacity="0.95"/>
+  <path d="M80 40L100 60M80 40L60 60M80 40V30M80 40V80M100 60L80 80M100 60L110 50M60 60L80 80M60 60L50 50M80 80V130M80 130H60M80 130H100M60 130V120M100 130V120" stroke="#00BFFF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M40 100H120V110H40V100Z" fill="#00BFFF"/>
+</svg></div>
+          <div class="kicker" data-i18n="vp3_t" data-en="Plug‑and‑play" data-tr="Tak‑çalıştır">Plug‑and‑play</div>
+          <p data-i18n="vp3_s" data-en="GigE/PTZ/industrial cameras; fixed or mobile (AGV/UGV)." data-tr="GigE/PTZ/endüstriyel kameralar; sabit veya mobil (AGV/UGV).">GigE/PTZ/industrial cameras; fixed or mobile (AGV/UGV).</p>
+        </div>
+        <div class="card">
+          <div class="card-img"><svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="160" rx="12" fill="#050A1A" fill-opacity="0.95"/>
+  <rect x="50" y="50" width="60" height="60" rx="5" stroke="#00BFFF" stroke-width="6"/>
+  <path d="M70 50V40H90V50M70 110V120H90V110" stroke="#00BFFF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M40 70H50V90H40M110 70H120V90H110" stroke="#00BFFF" stroke-width="6" stroke-linecap="round"/>
+</svg></div>
+          <div class="kicker" data-i18n="vp4_t" data-en="Self‑POC" data-tr="Self‑POC">Self‑POC</div>
+          <p data-i18n="vp4_s" data-en="Train, test, and manage from a no‑code web console." data-tr="No‑code web konsoldan eğit, test et, yönet.">Train, test, and manage from a no‑code web console.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Web Platform -->
+  <section id="platform">
+    <div class="container"  style="margin-top: 30px;">
+      <h2 data-i18n="platform_h2" data-en="Web Platform" data-tr="Web Platformu">Web Platform</h2>
+      <p class="muted" data-i18n="platform_p" data-en="A no‑code console to run self‑POCs, manage edge fleets, and turn results into reports — all in your browser." data-tr="Tarayıcıda self‑POC, uç cihaz yönetimi ve raporlamayı birleştiren no‑code konsol.">A no‑code console to run self‑POCs, manage edge fleets, and turn results into reports — all in your browser.</p>
+      
+      <div style="margin:32px 0;border:1px solid var(--line);border-radius:20px;overflow:hidden">
+        <div class="card-img" style="height:400px;flex-direction:column">
+          <div style="font-size:24px;margin-bottom:12px">🖥️</div>
+          <img src="images/web.png" alt="Web Platform Screenshot" style="max-width:80%;border-radius:12px"/>
+          <div style="font-size:12px;margin-top:8px">(Would show dashboard interface)</div>
+        </div>
+      </div>
+      
+      <div class="grid cols-3" style="margin-top:20px">
+        <div class="card">
+          <h3 data-i18n="card1_h" data-en="Self‑POC" data-tr="Self‑POC">Self‑POC</h3>
+          <p class="muted" data-i18n="card1_p" data-en="Upload data, train unsupervised models, validate results, and move to production in hours." data-tr="Veri yükle, denetimsiz modelleri eğit, sonuçları doğrula ve saatler içinde üretime al.">Upload data, train unsupervised models, validate results, and move to production in hours.</p>
+          <ul>
+            <li data-i18n="card1_i1" data-en="Drag‑and‑drop datasets" data-tr="Sürükle‑bırak veri setleri">Drag‑and‑drop datasets</li>
+            <li data-i18n="card1_i2" data-en="Auto‑tuned parameters" data-tr="Otomatik ayar optimizasyonu">Auto‑tuned parameters</li>
+            <li data-i18n="card1_i3" data-en="Versioned experiments" data-tr="Versiyonlanmış deneyler">Versioned experiments</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 data-i18n="card2_h" data-en="Edge Fleet Management" data-tr="Uç Cihaz Filosu">Edge Fleet Management</h3>
+          <p class="muted" data-i18n="card2_p" data-en="Register devices, push models, configure pipelines, and monitor health on a live map." data-tr="Cihaz kaydı, model dağıtımı, hat üzeri ayar ve canlı harita izleme.">Register devices, push models, configure pipelines, and monitor health on a live map.</p>
+          <ul>
+            <li data-i18n="card2_i1" data-en="Device provisioning" data-tr="Cihaz hazırlama">Device provisioning</li>
+            <li data-i18n="card2_i2" data-en="Model rollouts" data-tr="Model sürümleri">Model rollouts</li>
+            <li data-i18n="card2_i3" data-en="Live telemetry" data-tr="Canlı telemetri">Live telemetry</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 data-i18n="card3_h" data-en="Reporting & Analytics" data-tr="Raporlama & Analitik">Reporting & Analytics</h3>
+          <p class="muted" data-i18n="card3_p" data-en="Turn inspections into insight: exportable dashboards, KPIs, and audit trails." data-tr="Denetimleri içgörüye çevir: panolar, KPI'lar ve dışa aktarım.">Turn inspections into insight: exportable dashboards, KPIs, and audit trails.</p>
+          <ul>
+            <li data-i18n="card3_i1" data-en="Per‑line KPIs" data-tr="Hat bazlı KPI'lar">Per‑line KPIs</li>
+            <li data-i18n="card3_i2" data-en="False‑positive tracking" data-tr="Yanlış‑pozitif takibi">False‑positive tracking</li>
+            <li data-i18n="card3_i3" data-en="CSV/PNG/PDF export" data-tr="CSV/PNG/PDF dışa aktarım">CSV/PNG/PDF export</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:18px">
+        <a href="https://machinetra.app" target="_blank" rel="noreferrer" class="btn btn-primary" data-i18n="start_self_poc" data-en="Start a self‑POC →" data-tr="Self‑POC başlat →">Start a self‑POC →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Edge App -->
+  <section id="edge">
+    <div class="container"  style="margin-top: 30px;">
+      <h2 data-i18n="edge_h2" data-en="Edge Application" data-tr="Uç Uygulama">Edge Application</h2>
+      <p class="muted" data-i18n="edge_p" data-en="Real‑time, label‑free anomaly detection running entirely on embedded CPUs/GPUs. Works offline, adapts with operator feedback, and supports audio anomalies via mel‑spectrograms." data-tr="Gerçek zamanlı, etiketsiz anomali tespiti tamamen gömülü CPU/GPU'larda çalışır. Çevrimdışı mod, operatör geri bildirimiyle adaptasyon ve mel‑spektrogram ile ses anomalisi desteği.">Real‑time, label‑free anomaly detection running entirely on embedded CPUs/GPUs. Works offline, adapts with operator feedback, and supports audio anomalies via mel‑spectrograms.</p>
+      
+      <div style="margin:32px 0;border:1px solid var(--line);border-radius:20px;overflow:hidden">
+        <div class="card-img" style="height:400px;flex-direction:column">
+          <div style="font-size:24px;margin-bottom:12px">📱</div>
+          Edge App Interface
+          <div style="font-size:12px;margin-top:8px">(Would show real-time detection UI)</div>
+        </div>
+      </div>
+      
+      <div class="grid cols-2" style="margin-top:20px">
+        <div class="card">
+          <h3 data-i18n="edge_kc" data-en="Key capabilities" data-tr="Öne çıkan kabiliyetler">Key capabilities</h3>
+          <ul>
+            <li data-i18n="edge_kc_i1" data-en="Domain‑independent unsupervised detection (no labeled defects)" data-tr="Alan bağımsız denetimsiz tespit (etiketli hata gerekmez)">Domain‑independent unsupervised detection (no labeled defects)</li>
+            <li data-i18n="edge_kc_i2" data-en="&lt;50 ms per‑frame latency on Jetson‑class devices" data-tr="Jetson sınıfı cihazlarda kare başına &lt;50 ms gecikme">&lt;50 ms per‑frame latency on Jetson‑class devices</li>
+            <li data-i18n="edge_kc_i3" data-en="On‑device feedback loop — no full retraining cycles" data-tr="Cihaz‑içi geri bildirim döngüsü — tam yeniden eğitim yok">On‑device feedback loop — no full retraining cycles</li>
+            <li data-i18n="edge_kc_i4" data-en="Configurable pipelines (pre/post‑processing, thresholds, alarms)" data-tr="Yapılandırılabilir hatlar (ön/son işleme, eşikler, alarmlar)">Configurable pipelines (pre/post‑processing, thresholds, alarms)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 data-i18n="edge_int" data-en="Integrations" data-tr="Entegrasyonlar">Integrations</h3>
+          <ul>
+            <li data-i18n="edge_int_i1" data-en="GigE/USB/industrial cameras, PTZ control" data-tr="GigE/USB/endüstriyel kameralar, PTZ kontrol">GigE/USB/industrial cameras, PTZ control</li>
+            <li data-i18n="edge_int_i2" data-en="Digital I/O, OPC‑UA/MQTT for line signaling" data-tr="Dijital I/O, OPC‑UA/MQTT hat sinyali">Digital I/O, OPC‑UA/MQTT for line signaling</li>
+            <li data-i18n="edge_int_i3" data-en="REST/ROS2 API for robots and MES/SCADA" data-tr="Robotlar ve MES/SCADA için REST/ROS2 API">REST/ROS2 API for robots and MES/SCADA</li>
+            <li data-i18n="edge_int_i4" data-en="Role‑based access & secure device updates" data-tr="Rol tabanlı erişim ve güvenli cihaz güncellemeleri">Role‑based access & secure device updates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hardware Options -->
+  <section id="hardware">
+    <div class="container"  style="margin-top: 30px;">
+      <h2 data-i18n="hw_h2" data-en="Hardware Options" data-tr="Donanım Seçenekleri">Hardware Options</h2>
+      <p class="muted" data-i18n="hw_p" data-en="Deploy fixed inspection stations or cover wide areas cost‑effectively with a mobile platform." data-tr="Sabit istasyonlarla hat‑içi denetim kurun veya geniş alanları mobil platformla uygun maliyetle kapsayın.">Deploy fixed inspection stations or cover wide areas cost‑effectively with a mobile platform.</p>
+      
+      <div class="grid cols-3" style="margin-top:20px">
+        <div class="card">
+          <div class="card-img" style="flex-direction:column">
+            <div style="font-size:24px;margin-bottom:12px">📷</div>
+            Fixed Station Photo
+          </div>
+          <h3 data-i18n="hw1_h" data-en="Fixed Stations" data-tr="Sabit İstasyonlar">Fixed Stations</h3>
+          <p class="muted" data-i18n="hw1_p" data-en="Compact edge boxes with industrial cameras for in‑line inspection." data-tr="Endüstriyel kameralarla kompakt edge kutuları — hat içi denetim.">Compact edge boxes with industrial cameras for in‑line inspection.</p>
+          <ul>
+            <li data-i18n="hw1_s1" data-en="GigE/PoE" data-tr="GigE/PoE">GigE/PoE</li>
+            <li data-i18n="hw1_s2" data-en="IP‑rated enclosures" data-tr="IP korumalı muhafazalar">IP‑rated enclosures</li>
+            <li data-i18n="hw1_s3" data-en="Vibration isolation" data-tr="Titreşim izolasyonu">Vibration isolation</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-img" style="flex-direction:column">
+            <div style="font-size:24px;margin-bottom:12px">🤖</div>
+            Mobile Robot Photo
+          </div>
+          <h3 data-i18n="hw2_h" data-en="Mobile (AGV/UGV)" data-tr="Mobil (AGV/UGV)">Mobile (AGV/UGV)</h3>
+          <p class="muted" data-i18n="hw2_p" data-en="Autonomous patrols for multi‑point or preventive inspections." data-tr="Çok noktalı veya önleyici denetimler için otonom devriyeler.">Autonomous patrols for multi‑point or preventive inspections.</p>
+          <ul>
+            <li data-i18n="hw2_s1" data-en="Navigation + PTZ" data-tr="Navigasyon + PTZ">Navigation + PTZ</li>
+            <li data-i18n="hw2_s2" data-en="Hot‑swap batteries" data-tr="Hot‑swap bataryalar">Hot‑swap batteries</li>
+            <li data-i18n="hw2_s3" data-en="Docking & auto‑upload" data-tr="Docking & otomatik yükleme">Docking & auto‑upload</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-img" style="flex-direction:column">
+            <div style="font-size:24px;margin-bottom:12px">🔧</div>
+            Edge Kit Photo
+          </div>
+          <h3 data-i18n="hw3_h" data-en="PTZ / GigE Kits" data-tr="PTZ / GigE Kitleri">PTZ / GigE Kits</h3>
+          <p class="muted" data-i18n="hw3_p" data-en="Drop‑in kits to upgrade existing cameras with edge AI." data-tr="Mevcut kameraları edge AI ile yükseltmek için tak‑çalıştır kitler.">Drop‑in kits to upgrade existing cameras with edge AI.</p>
+          <ul>
+            <li data-i18n="hw3_s1" data-en="Jetson/ARM/Coral" data-tr="Jetson/ARM/Coral">Jetson/ARM/Coral</li>
+            <li data-i18n="hw3_s2" data-en="I/O & field‑bus" data-tr="I/O & field‑bus">I/O & field‑bus</li>
+            <li data-i18n="hw3_s3" data-en="Remote provisioning" data-tr="Uzaktan hazırlama">Remote provisioning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="container cta"  style="margin-top: 30px;">
+      <h3 data-i18n="cta_h3" data-en="Ready to try Machinetra?" data-tr="Machinetra'yı denemeye hazır mısınız?">Ready to try Machinetra?</h3>
+      <p class="muted" data-i18n="cta_p" data-en="Spin up a self‑POC, connect a camera, and see results in minutes." data-tr="Bir self‑POC başlatın, bir kamera bağlayın ve dakikalar içinde sonuçları görün.">Spin up a self‑POC, connect a camera, and see results in minutes.</p>
+      <div style="margin-top:10px">
+        <a href="https://machinetra.app" target="_blank" rel="noreferrer" class="btn btn-primary" data-i18n="cta_open" data-en="Open machinetra.app" data-tr="machinetra.app'i aç">Open machinetra.app</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2 data-i18n="contact_h2" data-en="Contact" data-tr="İletişim">Contact</h2>
+      <p class="muted" data-i18n="contact_p" data-en="Have a line or site in mind? Let's discuss a pilot." data-tr="Aklınızda bir hat veya saha mı var? Bir pilotu konuşalım.">Have a line or site in mind? Let's discuss a pilot.</p>
+      <ul>
+        <li>Email: <a href="mailto:hello@machinetra.com">hello@machinetra.com</a></li>
+        <li>App: <a href="https://machinetra.app" target="_blank" rel="noreferrer">machinetra.app</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Machinetra — All rights reserved.
+  </footer>
+  <script>
+    // Language toggle (EN/TR) using data attributes
+    const btnEN = document.getElementById('btn-en');
+    const btnTR = document.getElementById('btn-tr');
+    const nodes = document.querySelectorAll('[data-i18n]');
+    function setLang(lang){
+      nodes.forEach(el=>{ const text = el.getAttribute('data-'+lang); if(text) el.textContent = text; });
+      btnEN.classList.toggle('active', lang==='en');
+      btnTR.classList.toggle('active', lang==='tr');
+      document.documentElement.lang = lang;
+
+       const heroSource = document.getElementById('heroSource');
+    if (heroSource) {
+      heroSource.src = lang === 'tr' ? 'videos/hero-tr.mp4' : 'videos/hero.mp4';
+      const heroVideo = document.getElementById('heroVideo');
+      if (heroVideo) heroVideo.load();
+    }
+    }
+    btnEN.addEventListener('click', ()=>setLang('en'));
+    btnTR.addEventListener('click', ()=>setLang('tr'));
+    setLang('en'); // default language
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Autoplay fallback for some mobile browsers (attempt play on interaction)
+    document.addEventListener('touchstart', ()=>{
+      const v=document.getElementById('heroVideo'); if(v && v.paused){ v.play().catch(()=>{}); }
+    }, { once:true });
+  </script>
+</body>
+</html>
