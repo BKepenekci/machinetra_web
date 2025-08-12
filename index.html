@@ -86,6 +86,22 @@ How to use:
       .cols-3{grid-template-columns:repeat(3,1fr)}
       .cols-2{grid-template-columns:repeat(2,1fr)}
     }
+    /* Careers visuals */
+    .careers-visual {
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
+      background:color-mix(in oklab, var(--bg) 92%, black);
+    }
+    .careers-visual img{
+      display:block;
+      width:100%;
+      height:100%;
+      max-height:520px;        /* isterseniz artırın/azaltın */
+      object-fit:cover;
+    }
+    .careers-grid-nested { gap:16px; }
+
   </style>
 </head>
 <body>
@@ -137,17 +153,17 @@ How to use:
       <div class="card">
         <div class="kicker" data-i18n="about_mission_t" data-en="Mission" data-tr="Misyon">Mission</div>
         <p data-i18n="about_mission_s"
-           data-en="Enable zero-defect manufacturing by bringing edge-native, label-free anomaly detection to every line and site."
-           data-tr="Uç-yerel, etiketsiz anomali tespitini her hat ve sahaya taşıyarak sıfır kusurlu üretimi mümkün kılmak.">
-           Enable zero-defect manufacturing by bringing edge-native, label-free anomaly detection to every line and site.
+           data-en="Driving zero-defect manufacturing through edge-native, label-free anomaly detection — on every line, at every site."
+           data-tr="Her üretim hattında ve her tesiste, uç-tabanlı, etiket gerektirmeyen anomali tespiti ile sıfır hatalı üretimi hayata geçirmek.">
+           Driving zero-defect manufacturing through edge-native, label-free anomaly detection — on every line, at every site.
         </p>
       </div>
       <div class="card">
         <div class="kicker" data-i18n="about_vision_t" data-en="Vision" data-tr="Vizyon">Vision</div>
         <p data-i18n="about_vision_s"
-           data-en="A unified Machinetra stack where QPath connects cameras, robots, and operators — turning inspections into continuous, self-improving quality."
-           data-tr="QPath’in kameraları, robotları ve operatörleri bir araya getirdiği; denetimleri sürekli, kendini geliştiren kaliteye dönüştüren birlik bir Machinetra yığını.">
-           A unified Machinetra stack where QPath connects cameras, robots, and operators — turning inspections into continuous, self-improving quality.
+           data-en="Our vision is to create a unified Machinetra ecosystem where QPath seamlessly connects cameras, robots, and operators — transforming inspections into a continuous, self-improving quality journey."
+           data-tr="Vizyonumuz, QPath’in kameraları, robotları ve operatörleri kusursuz şekilde bağladığı, denetimleri sürekli ve kendi kendini geliştiren bir kalite yolculuğuna dönüştüren bütünleşik bir Machinetra ekosistemi oluşturmaktır.">
+           Our vision is to create a unified Machinetra ecosystem where QPath seamlessly connects cameras, robots, and operators — transforming inspections into a continuous, self-improving quality journey.
         </p>
       </div>
       <div class="card">
@@ -355,8 +371,10 @@ How to use:
 
  <!-- Careers (Machinetra) -->
 <section id="careers">
-  <div class="container"  style="margin-top: 30px;">
-    <h2 data-i18n="careers_h2" data-en="Careers at Machinetra" data-tr="Machinetra’da Kariyer">Careers at Machinetra</h2>
+  <div class="container" style="margin-top:30px;">
+    <h2 data-i18n="careers_h2" data-en="Careers at Machinetra" data-tr="Machinetra’da Kariyer">
+      Careers at Machinetra
+    </h2>
     <p class="muted"
        data-i18n="careers_intro"
        data-en="We are building the future of industrial visual inspection at the edge. Join us to ship QPath systems that run on lines, robots, and sites."
@@ -364,48 +382,68 @@ How to use:
        We are building the future of industrial visual inspection at the edge. Join us to ship QPath systems that run on lines, robots, and sites.
     </p>
 
-    <div class="grid cols-3" style="margin-top:20px">
-      <div class="card">
-        <div class="kicker" data-i18n="careers_open_roles" data-en="Open roles" data-tr="Açık pozisyonlar">Open roles</div>
-        <ul style="margin:6px 0 0; padding-left:18px">
-          <li data-i18n="careers_r1" data-en="Computer Vision Engineer (Edge)" data-tr="Görüntü İşleme Mühendisi (Edge)">Computer Vision Engineer (Edge)</li>
-          <li data-i18n="careers_r2" data-en="Robotics Integration Engineer (ROS2)" data-tr="Robotik Entegrasyon Mühendisi (ROS2)">Robotics Integration Engineer (ROS2)</li>
-          <li data-i18n="careers_r3" data-en="Frontend Engineer (Web Platform)" data-tr="Frontend Mühendisi (Web Platformu)">Frontend Engineer (Web Platform)</li>
-        </ul>
-        <div style="margin-top:10px">
-          <a href="mailto:info@qpath.com.tr" class="btn btn-ghost" data-i18n="careers_apply" data-en="Apply via email →" data-tr="E-posta ile başvur →">Apply via email →</a>
+    <!-- Ana: 2 sütun (solda görsel, sağda kartlar) -->
+    <div class="grid cols-2" style="margin-top:20px">
+      <!-- Sol görsel sütun -->
+      <figure class="careers-visual">
+        <!-- Not: kendi görselinizi /images/careers.jpg olarak yerleştirin -->
+        <img src="images/careers.png" alt="Machinetra team collaborating in an R&D space" />
+      </figure>
+
+      <!-- Sağ sütun: üstte 2 kart yan yana, altta pledge -->
+      <div class="grid careers-grid-nested">
+        <!-- Üst satır: 2 kart yan yana -->
+        <div class="grid cols-2">
+          <!-- Open roles -->
+          <div class="card">
+            <div class="kicker" data-i18n="careers_open_roles" data-en="Open roles" data-tr="Açık pozisyonlar">Open roles</div>
+            <ul style="margin:6px 0 0; padding-left:18px">
+              <li data-i18n="careers_r1" data-en="Computer Vision Engineer (Edge)" data-tr="Görüntü İşleme Mühendisi (Edge)">Computer Vision Engineer (Edge)</li>
+              <li data-i18n="careers_r2" data-en="Robotics Integration Engineer (ROS2)" data-tr="Robotik Entegrasyon Mühendisi (ROS2)">Robotics Integration Engineer (ROS2)</li>
+              <li data-i18n="careers_r3" data-en="Frontend Engineer (Web Platform)" data-tr="Frontend Mühendisi (Web Platformu)">Frontend Engineer (Web Platform)</li>
+            </ul>
+            <div style="margin-top:10px">
+              <a href="mailto:info@qpath.com.tr" class="btn btn-ghost" data-i18n="careers_apply" data-en="Apply via email →" data-tr="E-posta ile başvur →">Apply via email →</a>
+            </div>
+          </div>
+
+          <!-- Why Machinetra -->
+          <div class="card">
+            <div class="kicker" data-i18n="careers_why" data-en="Why Machinetra" data-tr="Neden Machinetra">Why Machinetra</div>
+            <ul style="margin:6px 0 0; padding-left:18px">
+              <li data-i18n="careers_b1" data-en="Impact: ship to real factories and sites" data-tr="Etki: Gerçek fabrika ve sahalara ürün gönderme">Impact: ship to real factories and sites</li>
+              <li data-i18n="careers_b2" data-en="Ownership: small, high-leverage teams" data-tr="Sahiplik: Küçük, yüksek kaldıraçlı ekipler">Ownership: small, high-leverage teams</li>
+              <li data-i18n="careers_b3" data-en="Growth: hands-on robotics, vision, and edge AI" data-tr="Gelişim: Robotik, görüntü ve edge AI’de uygulamalı çalışma">Growth: hands-on robotics, vision, and edge AI</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Alt satır: Tam genişlik pledge kartı -->
+        <div class="card">
+          <div class="kicker" data-i18n="careers_dei_t" data-en="Gender Equality Commitment" data-tr="Toplumsal Cinsiyet Eşitliği Taahhüdü">
+            Gender Equality Commitment
+          </div>
+          <p data-i18n="careers_dei_p"
+             data-en="Machinetra is committed to equal opportunity and an inclusive workplace. We act against bias in hiring, pay, and progression; and we publish our pledge."
+             data-tr="Machinetra, eşit fırsat ve kapsayıcı çalışma ortamına bağlıdır. İşe alım, ücret ve kariyer ilerlemesi süreçlerinde önyargıya karşı hareket eder; taahhütnamemizi yayımlarız.">
+             Machinetra is committed to equal opportunity and an inclusive workplace. We act against bias in hiring, pay, and progression; and we publish our pledge.
+          </p>
+          <div class="pledge" style="display:flex;align-items:center;gap:8px;margin-top:8px">
+            <span>📄</span>
+            <a href="Machinetra_Gender_Equality_Pledge.pdf" target="_blank" rel="noreferrer"
+               data-i18n="careers_dei_link"
+               data-en="Read Machinetra’s Gender Equality Pledge (PDF)"
+               data-tr="Machinetra Toplumsal Cinsiyet Eşitliği Taahhütnamesi (PDF)">
+               Read Machinetra’s Gender Equality Pledge (PDF)
+            </a>
+          </div>
         </div>
       </div>
-
-      <div class="card">
-        <div class="kicker" data-i18n="careers_why" data-en="Why Machinetra" data-tr="Neden Machinetra">Why Machinetra</div>
-        <ul style="margin:6px 0 0; padding-left:18px">
-          <li data-i18n="careers_b1" data-en="Impact: ship to real factories and sites" data-tr="Etki: Gerçek fabrika ve sahalara ürün gönderme">Impact: ship to real factories and sites</li>
-          <li data-i18n="careers_b2" data-en="Ownership: small, high-leverage teams" data-tr="Sahiplik: Küçük, yüksek kaldıraçlı ekipler">Ownership: small, high-leverage teams</li>
-          <li data-i18n="careers_b3" data-en="Growth: hands-on robotics, vision, and edge AI" data-tr="Gelişim: Robotik, görüntü ve edge AI’de uygulamalı çalışma">Growth: hands-on robotics, vision, and edge AI</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="kicker" data-i18n="careers_dei_t" data-en="Gender Equality Commitment" data-tr="Toplumsal Cinsiyet Eşitliği Taahhüdü">Gender Equality Commitment</div>
-        <p data-i18n="careers_dei_p"
-           data-en="Machinetra is committed to equal opportunity and an inclusive workplace. We act against bias in hiring, pay, and progression; and we publish our pledge."
-           data-tr="Machinetra, eşit fırsat ve kapsayıcı çalışma ortamına bağlıdır. İşe alım, ücret ve kariyer ilerlemesi süreçlerinde önyargıya karşı hareket eder; taahhütnamemizi yayımlarız.">
-           Machinetra is committed to equal opportunity and an inclusive workplace. We act against bias in hiring, pay, and progression; and we publish our pledge.
-        </p>
-        <div class="pledge">
-          <span>📄</span>
-          <a href="Machinetra_Gender_Equality_Pledge.pdf" target="_blank" rel="noreferrer"
-             data-i18n="careers_dei_link"
-             data-en="Read Machinetra’s Gender Equality Pledge (PDF)"
-             data-tr="Machinetra Toplumsal Cinsiyet Eşitliği Taahhütnamesi (PDF)">
-             Read Machinetra’s Gender Equality Pledge (PDF)
-          </a>
-        </div>
-      </div>
+      <!-- /Sağ sütun -->
     </div>
   </div>
 </section>
+
 
 
   <!-- CTA -->
