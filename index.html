@@ -101,31 +101,99 @@ How to use:
       object-fit:cover;
     }
     .careers-grid-nested { gap:16px; }
+   /* Header içini referans noktası yapalım (absolute nav için) */
+.header .header-inner{ position:relative; }
 
+/* Hamburger buton (mobilde görünür, desktop'ta gizli) */
+.menu-toggle{
+  display:block;
+  cursor:pointer;
+  background:transparent;
+  border:1px solid var(--line);
+  color:var(--fg);
+  padding:6px 10px;
+  border-radius:10px;
+  font-size:20px;
+}
+
+/* Mobil açılır nav paneli (varsayılan kapalı) */
+.nav{
+  display:none;
+}
+
+/* Panel açıkken */
+.nav.is-open{
+  display:flex;
+  flex-direction:column;
+  position:absolute;
+  top:56px;               /* header yüksekliğine göre ayarlayın */
+  right:16px;
+  width:min(80vw, 280px);
+  gap:12px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:color-mix(in oklab, var(--bg) 92%, black);
+  box-shadow:0 12px 24px color-mix(in oklab, var(--bg) 70%, black);
+  animation:slideFade .18s ease-out;
+  z-index:100;            /* Üste gelsin */
+}
+.nav.is-open a{
+  padding:8px 6px;
+  border-radius:8px;
+}
+.nav.is-open a:hover{
+  background:color-mix(in oklab, var(--bg) 86%, black);
+  color:var(--fg);
+}
+
+/* Desktop’ta hamburger gizlenir, nav yatay gösterilir */
+@media (min-width:768px){
+  .menu-toggle{ display:none; }
+  .nav{
+    display:flex;
+    gap:24px;
+    color:var(--muted);
+    position:static;     /* desktop’ta absolute olmasın */
+  }
+  .nav a:hover{ color:var(--fg); }
+}
+
+/* Küçük bir açılış animasyonu */
+@keyframes slideFade{
+  from{ transform:translateY(-6px); opacity:0; }
+  to{   transform:translateY(0);    opacity:1; }
+}
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header class="header" id="top">
-    <div class="container header-inner">
-      <a href="https://machinetra-web.onrender.com/" class="logo">Machinetra</a>
-      <nav class="nav">
-        <a href="#about" data-i18n="nav_about" data-en="About" data-tr="Hakkında">About</a>
-        <a href="#platform" data-i18n="nav_platform" data-en="Web Platform" data-tr="Web Platformu">Web Platform</a>
-        <a href="#edge" data-i18n="nav_edge" data-en="Edge App" data-tr="Uç Uygulama">Edge App</a>
-        <a href="#hardware" data-i18n="nav_hw" data-en="Hardware" data-tr="Donanım">Hardware</a>
-        <a href="#careers" data-i18n="nav_careers" data-en="Careers" data-tr="Kariyer">Careers</a>
-        <a href="#contact" data-i18n="nav_contact" data-en="Contact" data-tr="İletişim">Contact</a>
-      </nav>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="lang">
-          <button type="button" id="btn-en" class="active">EN</button>
-          <button type="button" id="btn-tr">TR</button>
-        </div>
-        <a href="https://machinetra.app" target="_blank" rel="noreferrer" class="btn btn-primary" data-i18n="cta_try" data-en="Try self‑POC" data-tr="Self‑POC’u dene">Try self‑POC</a>
+ <header class="header" id="top">
+  <div class="container header-inner">
+    <a href="https://machinetra-web.onrender.com/" class="logo">Machinetra</a>
+
+    <!-- Hamburger (mobil) -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+
+    <nav class="nav" id="nav-menu">
+      <a href="#about" data-i18n="nav_about" data-en="About" data-tr="Hakkında">About</a>
+      <a href="#platform" data-i18n="nav_platform" data-en="Web Platform" data-tr="Web Platformu">Web Platform</a>
+      <a href="#edge" data-i18n="nav_edge" data-en="Edge App" data-tr="Uç Uygulama">Edge App</a>
+      <a href="#hardware" data-i18n="nav_hw" data-en="Hardware" data-tr="Donanım">Hardware</a>
+      <a href="#careers" data-i18n="nav_careers" data-en="Careers" data-tr="Kariyer">Careers</a>
+      <a href="#contact" data-i18n="nav_contact" data-en="Contact" data-tr="İletişim">Contact</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="lang">
+        <button type="button" id="btn-en" class="active">EN</button>
+        <button type="button" id="btn-tr">TR</button>
       </div>
+      <a href="https://machinetra.app" target="_blank" rel="noreferrer" class="btn btn-primary" data-i18n="cta_try" data-en="Try self-POC" data-tr="Self-POC’u dene">Try self-POC</a>
     </div>
-  </header>
+  </div>
+</header>
+
 
   <!-- Hero -->
   <section class="hero">
@@ -137,7 +205,7 @@ How to use:
   </section>
   <!-- About (Machinetra) -->
 <section id="about">
-  <div class="container"  style="margin-top: 30px;">
+  <div class="container"  style="margin-top: 50px;">
     <h2 data-i18n="about_h2"
         data-en="About Machinetra"
         data-tr="Machinetra Hakkında">About Machinetra</h2>
@@ -179,7 +247,7 @@ How to use:
 
 
   
-    <div class="container" style="margin-top:30px">      
+    <div class="container" style="margin-top:50px">      
         <h2 data-i18n="hero_h1" data-en="QPath: Domain‑Independent Industrial Visual Inspection — on the Edge" data-tr="QPath: Alan Bağımsız Endüstriyel Görsel Denetim — Uçta">Domain‑Independent Industrial Visual Inspection — on the Edge</h2>
         <p data-i18n="hero_p" data-en="Real‑time, label‑free anomaly detection running on embedded devices. Self‑POC from your browser. Deploy on fixed stations or mobile robots." data-tr="Etiket gerektirmeyen gerçek zamanlı anomali tespiti; gömülü cihazlarda çalışır. Tarayıcıdan self‑POC. Sabit istasyonlarda veya mobil robotlarda konuşlandırın.">Real‑time, label‑free anomaly detection running on embedded devices. Self‑POC from your browser. Deploy on fixed stations or mobile robots.</p>
         <div class="hero-actions"  style="margin-top: 20px;">
@@ -191,7 +259,7 @@ How to use:
 
     <!-- Quick value props -->
       <!-- Quick value props -->
-    <div class="container" style="margin-top:36px">
+    <div class="container" style="margin-top:56px">
       <div class="grid grid-4">
         <div class="card">
           <div class="card-img"><svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -238,7 +306,7 @@ How to use:
 
     <!-- Web Platform -->
   <section id="platform">
-    <div class="container"  style="margin-top: 30px;">
+    <div class="container"  style="margin-top: 50px;">
       <h2 data-i18n="platform_h2" data-en="Web Platform" data-tr="Web Platformu">Web Platform</h2>
       <p class="muted" data-i18n="platform_p" data-en="A no‑code console to run self‑POCs, manage edge fleets, and turn results into reports — all in your browser." data-tr="Tarayıcıda self‑POC, uç cihaz yönetimi ve raporlamayı birleştiren no‑code konsol.">A no‑code console to run self‑POCs, manage edge fleets, and turn results into reports — all in your browser.</p>
       
@@ -279,7 +347,7 @@ How to use:
           </ul>
         </div>
       </div>
-      <div style="margin-top:18px">
+      <div style="margin-top:38px">
         <a href="https://machinetra.app" target="_blank" rel="noreferrer" class="btn btn-primary" data-i18n="start_self_poc" data-en="Start a self‑POC →" data-tr="Self‑POC başlat →">Start a self‑POC →</a>
       </div>
     </div>
@@ -287,7 +355,7 @@ How to use:
 
   <!-- Edge App -->
   <section id="edge">
-    <div class="container"  style="margin-top: 30px;">
+    <div class="container"  style="margin-top: 50px;">
       <h2 data-i18n="edge_h2" data-en="Edge Application" data-tr="Uç Uygulama">Edge Application</h2>
       <p class="muted" data-i18n="edge_p" data-en="Real‑time, label‑free anomaly detection running entirely on embedded CPUs/GPUs. Works offline, adapts with operator feedback, and supports audio anomalies via mel‑spectrograms." data-tr="Gerçek zamanlı, etiketsiz anomali tespiti tamamen gömülü CPU/GPU'larda çalışır. Çevrimdışı mod, operatör geri bildirimiyle adaptasyon ve mel‑spektrogram ile ses anomalisi desteği.">Real‑time, label‑free anomaly detection running entirely on embedded CPUs/GPUs. Works offline, adapts with operator feedback, and supports audio anomalies via mel‑spectrograms.</p>
       
@@ -322,7 +390,7 @@ How to use:
 
   <!-- Hardware Options -->
   <section id="hardware">
-    <div class="container"  style="margin-top: 30px;">
+    <div class="container"  style="margin-top: 50px;">
       <h2 data-i18n="hw_h2" data-en="Hardware Options" data-tr="Donanım Seçenekleri">Hardware Options</h2>
       <p class="muted" data-i18n="hw_p" data-en="Deploy fixed inspection stations or cover wide areas cost‑effectively with a mobile platform." data-tr="Sabit istasyonlarla hat‑içi denetim kurun veya geniş alanları mobil platformla uygun maliyetle kapsayın.">Deploy fixed inspection stations or cover wide areas cost‑effectively with a mobile platform.</p>
       
@@ -369,7 +437,7 @@ How to use:
 
  <!-- Careers (Machinetra) -->
 <section id="careers">
-  <div class="container" style="margin-top:30px;">
+  <div class="container" style="margin-top:50px;">
     <h2 data-i18n="careers_h2" data-en="Careers at Machinetra" data-tr="Machinetra’da Kariyer">
       Careers at Machinetra
     </h2>
@@ -446,7 +514,7 @@ How to use:
 
   <!-- CTA -->
   <section>
-    <div class="container cta"  style="margin-top: 30px;">
+    <div class="container cta"  style="margin-top: 50px;">
       <h3 data-i18n="cta_h3" data-en="Ready to try QPath?" data-tr="QPath'i denemeye hazır mısınız?">Ready to try Machinetra?</h3>
       <p class="muted" data-i18n="cta_p" data-en="Spin up a self‑POC, connect a camera, and see results in minutes." data-tr="Bir self‑POC başlatın, bir kamera bağlayın ve dakikalar içinde sonuçları görün.">Spin up a self‑POC, connect a camera, and see results in minutes.</p>
       <div style="margin-top:10px">
@@ -471,6 +539,32 @@ How to use:
     © <span id="year"></span> Machinetra — All rights reserved.
   </footer>
   <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var menuBtn = document.getElementById('menu-toggle');
+    var navMenu = document.getElementById('nav-menu');
+
+    if(!menuBtn || !navMenu){ return; }
+
+    menuBtn.addEventListener('click', function(){
+      var open = navMenu.classList.toggle('is-open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Linke tıklanınca menüyü kapat
+    navMenu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ navMenu.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded','false'); });
+    });
+
+    // Header dışına tıklayınca kapat (mobil UX için)
+    document.addEventListener('click', function(e){
+      if(!navMenu.classList.contains('is-open')) return;
+      var header = document.querySelector('.header');
+      if(header && !header.contains(e.target)){
+        navMenu.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded','false');
+      }
+    });
+  });
     // Language toggle (EN/TR) using data attributes
     const btnEN = document.getElementById('btn-en');
     const btnTR = document.getElementById('btn-tr');
