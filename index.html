@@ -164,6 +164,17 @@ How to use:
   from{ transform:translateY(-6px); opacity:0; }
   to{   transform:translateY(0);    opacity:1; }
 }
+
+.muted a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.muted a:hover {
+  color: var(--accent-2);
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
@@ -210,12 +221,12 @@ How to use:
         data-en="About Machinetra"
         data-tr="Machinetra Hakkında">About Machinetra</h2>
 
-    <p class="muted"
-       data-i18n="about_p1"
-       data-en="Machinetra was founded in 2025 as a ParanaVision spin-off. QPath — a brand developed by Machinetra — delivers integrated, modular, and scalable yet cost-effective solutions for industrial visual inspection."
-       data-tr="Machinetra, 2025 yılında ParanaVision’dan bir spin-off olarak kuruldu. Machinetra tarafından geliştirilen bir ürün markası olan QPath, endüstriyel görsel denetim için bütünleşik, modüler, ölçeklenebilir ve maliyet etkin çözümler sunar.">
-       Machinetra was founded in 2025 as a ParanaVision spin-off. QPath — a brand developed by Machinetra — delivers integrated, modular, and scalable yet cost-effective solutions for industrial visual inspection.
-    </p>
+ <p class="muted"
+   data-i18n="about_p1"
+   data-en='Machinetra was founded in 2025 as a <a href="http://paranavision.com.tr" target="_blank" rel="noopener noreferrer">ParanaVision</a> spin-off. QPath — a brand developed by Machinetra — delivers integrated, modular, and scalable yet cost-effective solutions for industrial visual inspection.'
+   data-tr='Machinetra, 2025 yılında <a href="http://paranavision.com.tr" target="_blank" rel="noopener noreferrer">ParanaVision</a>’dan bir spin-off olarak kuruldu. Machinetra tarafından geliştirilen bir ürün markası olan QPath, endüstriyel görsel denetim için bütünleşik, modüler, ölçeklenebilir ve maliyet etkin çözümler sunar.'>
+   Machinetra was founded in 2025 as a <a href="http://paranavision.com.tr" target="_blank" rel="noopener noreferrer">ParanaVision</a> spin-off. QPath — a brand developed by Machinetra — delivers integrated, modular, and scalable yet cost-effective solutions for industrial visual inspection.
+</p>
 
     <div class="grid cols-3" style="margin-top:20px">
       <div class="card">
@@ -569,19 +580,24 @@ How to use:
     const btnEN = document.getElementById('btn-en');
     const btnTR = document.getElementById('btn-tr');
     const nodes = document.querySelectorAll('[data-i18n]');
-    function setLang(lang){
-      nodes.forEach(el=>{ const text = el.getAttribute('data-'+lang); if(text) el.textContent = text; });
-      btnEN.classList.toggle('active', lang==='en');
-      btnTR.classList.toggle('active', lang==='tr');
-      document.documentElement.lang = lang;
+   // ...existing code...
+function setLang(lang){
+  nodes.forEach(el=>{
+    const text = el.getAttribute('data-'+lang);
+    if(text) el.innerHTML = text; // <-- DÜZELTİLDİ
+  });
+  btnEN.classList.toggle('active', lang==='en');
+  btnTR.classList.toggle('active', lang==='tr');
+  document.documentElement.lang = lang;
 
-       const heroSource = document.getElementById('heroSource');
-    if (heroSource) {
-      heroSource.src = lang === 'tr' ? 'videos/hero-tr.mp4' : 'videos/hero.mp4';
-      const heroVideo = document.getElementById('heroVideo');
-      if (heroVideo) heroVideo.load();
-    }
-    }
+  const heroSource = document.getElementById('heroSource');
+  if (heroSource) {
+    heroSource.src = lang === 'tr' ? 'videos/hero-tr.mp4' : 'videos/hero.mp4';
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) heroVideo.load();
+  }
+}
+// ...existing code...
     btnEN.addEventListener('click', ()=>setLang('en'));
     btnTR.addEventListener('click', ()=>setLang('tr'));
     setLang('en'); // default language
